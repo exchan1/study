@@ -5,6 +5,8 @@ sudo sed -i 's/security.ubuntu.com/ftp.daumkakao.com/g' /etc/apt/sources.list
 :%s/security.ubuntu.com/ftp.daumkakao.com/g
 :%s/extras.ubuntu.com/ftp.daumkakao.com/g
 
+## ssh -p 1441 exchan1@122.45.82.104
+
 
 sudo apt-get update
 sudo apt-get dist-upgrade
