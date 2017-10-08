@@ -1,0 +1,73 @@
+# MySQL database shared with tomcat containers.
+db:
+  image: mysql:5.7
+  environment:
+    MYSQL_ROOT_PASSWORD: somewordpress
+    MYSQL_DATABASE: example_db
+    MYSQL_USER: example_db_user
+    MYSQL_PASSWORD: example_db_pass
+  volumes:
+    - ./db:/docker-entrypoint-initdb.d
+    - ./db/db_data:/var/lib/mysql
+
+# First node of the first Tomcat virtual host.
+tomcat_1_node_1:
+  image: tomcat:latest
+  # Environment variables do not appear to be getting loaded the first time Tomcat starts!
+  environment:
+    VIRTUAL_HOST: tomcat_1.mulligan.ie
+    VIRTUAL_PORT: 8080
+    JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
+    JDBC_USER: example_db_user
+    JDBC_PASS: example_db_pass
+  volumes:
+    - ./tomcat/webapps:/usr/local/tomcat/webapps
+    - ./tomcat/logs/tomcat1/:/usr/local/tomcat/logs
+    - ./tomcat/conf/tomcat1/:/usr/local/tomcat/conf
+  links:
+    - db
+
+# Second node of the first Tomcat virtual host.
+tomcat_1_node_2:
+  image: tomcat:latest
+  environment:
+    VIRTUAL_HOST: tomcat_1.mulligan.ie
+    VIRTUAL_PORT: 8080
+    JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
+    JDBC_USER: example_db_user
+    JDBC_PASS: example_db_pass
+  volumes:
+    - ./tomcat/webapps:/usr/local/tomcat/webapps
+    - ./tomcat/logs/tomcat2/:/usr/local/tomcat/logs
+    - ./tomcat/conf/tomcat2/:/usr/local/tomcat/conf
+  links:
+    - db
+
+# First node of the second Tomcat virtual host.
+tomcat_2_node_1:
+  image: tomcat:latest
+  environment:
+    VIRTUAL_HOST: tomcat_2.mulligan.ie
+    VIRTUAL_PORT: 8080
+    JDBC_URL: jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true
+    JDBC_USER: example_db_user
+    JDBC_PASS: example_db_pass
+  volumes:
+    - ./tomcat/webapps:/usr/local/tomcat/webapps
+    - ./tomcat/logs/tomcat3/:/usr/local/tomcat/logs
+    - ./tomcat/conf/tomcat3/:/usr/local/tomcat/conf
+  links:
+    - db
+
+# nginx container that automatically creates a load balancer / reverse proxy across the 3 tomcat containers / 2 virtual hosts.
+nginx:
+  image: nginx:latest
+  ports:
+    - "9003:80"
+  volumes:
+    - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    - ./nginx/html:/var/www/nginx/html
+  links:
+    - tomcat_1_node_1
+    - tomcat_1_node_2
+    - tomcat_2_node_1

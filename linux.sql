@@ -32,6 +32,14 @@ docker -v
 docker-compose -v
 
 
+## mount -t ntfs-3g /dev/sdc1 /home/exchan1/compose-plex/data/usb/
+
+
+
+
+
+
+
 
 
 
@@ -122,3 +130,16 @@ git clone https://github.com/dymaxionkim/UbuntuBang.git
 cd UbuntuBang
 chmod +x ./UbuntuBang.sh
 sudo sh UbuntuBang.sh
+
+
+
+
+docker create --name=transmission \
+-v /home/exchan1/compose-transmission/config:/config \
+-v /home/exchan1/compose-transmission/downloads:/downloads \
+-v /home/exchan1/compose-transmission/watch:/watch \
+-e PGID=0 -e PUID=0 \
+-e TZ=Asia/Seoul \
+-p 9091:9091 -p 51413:51413 \
+-p 51413:51413/udp \
+linuxserver/transmission
