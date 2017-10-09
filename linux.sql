@@ -31,9 +31,10 @@ sudo usermod -aG docker $(whoami)
 docker -v
 docker-compose -v
 
-
+## USB Mount
 ## mount -t ntfs-3g /dev/sdc1 /home/exchan1/compose-plex/data/usb/
 
+## tasksel
 
 
 
