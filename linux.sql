@@ -33,7 +33,7 @@ docker-compose -v
 
 ## USB Mount
 ## mount -t ntfs-3g /dev/sdc1 /home/exchan1/compose-plex/data/usb/
-
+## umount /home/exchan1/compose-plex/data/usb
 ## tasksel
 
 
