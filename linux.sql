@@ -144,3 +144,89 @@ docker create --name=transmission \
 -p 9091:9091 -p 51413:51413 \
 -p 51413:51413/udp \
 linuxserver/transmission
+
+
+
+##---------------------------------------------------------------------------------------------------
+### 이클립스 단축키
+대문자로 변환: ctrl + shift + x
+소문자로 변환: ctrl + shift + y
+들여쓰기: ctrl + shift + tab ( 블록 범위 )
+내어쓰기: shift + tab ( 블록 범위 )
+커서 이동: alt + ↑, alt + ↓
+컴파일(저장): ctrl + s
+모든 클래스 저장: ctrl + shift + s
+라인으로 커서 이동: ctrl + l
+전체 선택:  ctrl + a
+소스 정렬:  ctrl + shift + f ( 블록 범위 )
+한 줄 삭제: ctrl + d
+패널 접기: ctrl + m
+디버깅: F11
+실행: ctrl + F11
+오른쪽클릭 + Source: alt + shift + s
+getter, setter 자동 구현: (alt + shift + s) + r
+디폴트 생성자 자동 구현: (alt + shift + s) + c
+빌드 생성자 자동 구현: (alt + shift + s) + o
+Ctrl + e : 한줄지움
+Ctrl + w : 메뉴보여줌
+Ctrl + space : 클래스등 코드 도움
+Ctrl + / : 한줄 주석 반대는 Ctrl + \
+Ctrl + , : 찾기나, TASK항목 이동
+Ctrl + . : 이동
+Ctrl + F6 : Editor 선택
+Ctrl + F7 : View 선택
+Ctrl + F8 : Perspectieve 선택
+Ctrl + F11 : 디버깅
+Ctrl + 1 : QuickFix 실행
+Ctrl + Shift + b : 브레이크 포인트
+Ctrl + Shift + e : 현재 캐럿에서 끝까지 삭제
+Ctrl + Shift + f : 코드 포맷팅
+Ctrl + Shift + m : 자동 임포트
+Ctrl + Shift + o : 임포트 자동 정리
+Ctrl + Shift + space : 입력 파라미터 정보 보여줌
+
+-- 테스트 자동화 툴
+http://dev.naver.com/projects/guitar
+https://github.com/naver/guitar
+https://www.youtube.com/watch?v=qlnF6mFeP4c
+
+
+tar zcvf ./upload.tar.gz ./upload --exclude=./upload/dev --exclude=*.pdf --exclude=*.mp3 --exclude=*.zip
+
+
+find /home/kdnavien/deploy/backup/ -type f -ctime +30 -exec rm -rf {} \;
+cat /dev/null > catalina.out
+
+
+tar zcvf ./upload.tar.gz ./upload \
+--exclude=./upload/customer \
+--exclude=./upload/editor \
+--exclude=./upload/ir \
+--exclude=./upload/main \
+--exclude=./upload/pr \
+--exclude=./upload/productSpec \
+--exclude=./upload/products
+
+
+tar zcvf ./images.tar.gz ./images \
+--exclude=./images/email \
+--exclude=./images/ko
+
+
+tar zcvf ./kd-new-mgmt.tar.gz ./kd-new-mgmt \
+--exclude=./kd-new-mgmt/webapp/resources/upload \
+--exclude=./kd-new-mgmt/webapp/resources/images
+
+
+tar zcvf ./kd-new-web.tar.gz ./kd-new-web \
+--exclude=./kd-new-web/webapp/resources/upload \
+--exclude=./kd-new-web/webapp/resources/images
+
+
+--------------- Bausch Push Test
+$.get('./app_proc.jsp?Trans=S&fiPushSeq=43');
+
+
+
+========= MSSQL Test
+sqlcmd -U kdnavien -P kdnavien -S localhost -d kdnavien -Q "UPDATE T_AS_REQUEST SET AS_CUST_MODEL='test' WHERE AS_CONSULT_NO='2016122900014'"
