@@ -44,3 +44,8 @@ mv $WAR_NAME backup/$WAR_NAME.$(date +"%Y%m%d%H%M%S")
 
 find /home/kdnavien/deploy/backup/ -type f -ctime +10 -exec rm -rf {} \;
 find /home/kdnavien/kdnavien-tomcat/logs -type f -ctime +10 -exec rm -rf {} \;
+
+
+## Test commit
+## git config --global user.name "dkkim"
+## git config --global user.email exchan1@gmail.com
