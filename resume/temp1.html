@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>Home</title>
+    <title>Resume</title>
     <link rel="canonical" href="https://getbootstrap.comhttps://getbootstrap.com/docs/5.3/examples/cover/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -86,6 +86,31 @@
       .bd-mode-toggle .dropdown-menu .active .bi {
         display: block !important;
       }
+
+    .container {
+        width: 220px; height: 310px; transition : all 0.1s;
+        position: relative;
+    }
+    .overlay {
+        position: absolute;
+        width: 220px;
+        height: 310px;
+        background: linear-gradient(105deg,
+        transparent 40%,
+        rgba(255, 219, 112, 0.8) 45%,
+        rgba(132, 50, 255 ,0.6) 50%,
+        transparent 54%);
+        filter: brightness(1.1) opacity(0.8);
+        mix-blend-mode: color-dodge;
+        background-size: 150% 150%;
+        background-position: 100%;
+        transition: all 0.1s;
+    }
+    .card {
+        width: 220px; height: 310px;
+        background-image: url(pika.webp);
+        background-size: cover;
+    }
     </style>
   </head>
 <body class="d-flex h-100 text-center text-bg-dark">
@@ -93,12 +118,12 @@
   <!-- <header class="mb-auto">
   </header> -->
   <main class="px-3">
-    <h1>New Page</h1>
+    <h1>Resume1</h1>
     <p class="lead">
-        <button type="button" class="btn btn-primary" onclick="movePage(1)">LOTTO</button>
-        <button type="button" class="btn btn-primary" onclick="movePage(2)">RESUME1</button>
-    </p>
-    <p class="lead">
+        <div class="container">
+            <div class="overlay"></div>
+            <div class="card"></div>
+        </div>
     </p>
   </main>
 
@@ -107,10 +132,23 @@
 <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <script>
-const movePage = (p) => {
-    if (p === 1) location.href = './lotto.html';
-    if (p === 2) location.href = './resume/temp1.html';
-};
+var container = document.querySelector('.container')
+var overlay = document.querySelector('.overlay')
+container.addEventListener('mousemove', function(e){
+    var x = e.offsetX
+    var y = e.offsetY
+    var rotateY = -1/5 * x + 20
+    var rotateX = 4/30 * y - 20
+
+    overlay.style = `background-position : ${x/5 + y/5}%; filter : opacity(${x/200}) brightness(1.2)`
+
+    container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+})
+
+container.addEventListener('mouseout', function(){
+    overlay.style = 'filter : opacity(0)'
+    container.style = 'transform : perspective(350px) rotateY(0deg) rotateX(0deg)'
+})
 </script>
 
     </body>
