@@ -87,6 +87,7 @@
         display: block !important;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
 <body class="d-flex h-100 text-center text-bg-dark">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -105,22 +106,23 @@
         </div>
     </p>
     <p class="lead">
-        <button type="button" class="btn btn-primary" onclick="setNum()">추출</button>
-        <table class="table" id="re">
-            <thead>
-                <tr>
-                <th scope="col">No1</th>
-                <th scope="col">No2</th>
-                <th scope="col">No3</th>
-                <th scope="col">No4</th>
-                <th scope="col">No5</th>
-                <th scope="col">No6</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <div id="reTxt"></div>
+      <button type="button" class="btn btn-primary" onclick="getNum()">번호조회</button>
+      <button type="button" class="btn btn-primary" onclick="setNum()">추출</button>
+      <table class="table" id="re">
+          <thead>
+              <tr>
+              <th scope="col">No1</th>
+              <th scope="col">No2</th>
+              <th scope="col">No3</th>
+              <th scope="col">No4</th>
+              <th scope="col">No5</th>
+              <th scope="col">No6</th>
+              </tr>
+          </thead>
+          <tbody>
+          </tbody>
+      </table>
+      <div id="reTxt"></div>
     </p>
   </main>
 
@@ -129,6 +131,35 @@
 <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <script>
+
+const getNum = () => {
+  const api = axios.create({
+    baseURL: 'https://www.dhlottery.co.kr'
+  });
+
+  api.interceptors.request.use(
+    function (config) {
+      config.headers.test = 'I am only a header!'
+      return config
+    },
+    function (error) {
+      return Promise.reject(error)
+    }
+  );
+
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+  axios.defaults.withCredentials = true;
+  axios.defaults.crossDomain = true;
+  let no = [];
+  let url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1116';
+  axios.get(url, {}, { withCredentials: true }
+  ).then(function (result) {
+    console.log("통신결과 : ", result);
+  }).catch(function (err) {
+    console.log(err);
+  });
+};
+
 const setNum = () => {
     // 1~45번
     let allNo = new Array(45).fill(0).map((_, i) => (i < 9) ? '0' + (i + 1) : String(i+1));
