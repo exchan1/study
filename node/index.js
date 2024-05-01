@@ -33,3 +33,8 @@ const getLottoNo = () => {
 };
 
 getLottoNo();
+
+/**
+ * 시용법
+ * npm run start
+ */
