@@ -34,3 +34,8 @@ for (let i = 0; i < 5; i++) {
   let high = predict();
   console.log(high.join(","));
 }
+
+/*
+npm run start
+npm run m-lotto
+*/
