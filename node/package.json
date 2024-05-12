@@ -6,12 +6,14 @@
   "scripts": {
     "start": "node index.js",
     "get-lotto": "node get-lotto.js",
+    "m-lotto": "node mlotto.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "expres": "^0.0.5",
+    "random": "^4.1.0",
     "request": "^2.88.2"
   }
 }

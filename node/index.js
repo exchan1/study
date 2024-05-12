@@ -28,11 +28,13 @@ const addDrwNo = () => {
           let existingData = JSON.parse(fileData); // 기존 데이터를 읽어옵니다.
           // 데이터가 배열인지 확인하고 추가
           if (Array.isArray(existingData)) {
-            existingData = [...existingData, newData]; // 새로운 데이터를 추가
+            existingData = [...existingData, ...newData]; // 새로운 데이터를 추가
           } else {
             // 배열이 아닐 경우, 배열로 변환하고 추가
-            existingData = [...existingData, newData];
+            existingData = [...existingData, ...newData];
           }
+
+          existingData = existingData.sort((a, b) => a.drwNo - b.drwNo);
 
           // 파일에 추가된 데이터를 다시 작성
           fs.writeFile(
@@ -65,6 +67,7 @@ const setDewNos = (e) => {
   nos.push(String(e.drwtNo5 < 10 ? "0" + e.drwtNo5 : e.drwtNo5));
   nos.push(String(e.drwtNo6 < 10 ? "0" + e.drwtNo6 : e.drwtNo6));
 
+  // console.log(`회차 : #${e.drwNo}`);
   console.log(nos.join("  "));
 
   return {
@@ -91,12 +94,12 @@ const reqNo = async (no) => {
   }
 
   setTimeout(function () {
-    addDrwNo();
+    // addDrwNo();
   }, 3000);
 };
 
 const getLottoNo = async () => {
-  const no = 10;
+  const no = 1119;
   await reqNo(no);
   // await addDrw();
 };
