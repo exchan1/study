@@ -4,7 +4,8 @@
   "description": "A script to scrape lottery numbers from the website using Puppeteer",
   "main": "lotteryNumbers.js",
   "scripts": {
-    "start": "node ./src/lotteryNumbers.js"
+    "start": "node ./src/lotteryNumbers.js",
+    "extract": "node ./src/extractBrunchContent.js"
   },
   "author": "Your Name",
   "license": "MIT",
