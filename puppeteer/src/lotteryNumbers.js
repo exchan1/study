@@ -1,4 +1,6 @@
 const puppeteer = require("puppeteer");
+const fs = require("fs");
+const path = require("path");
 
 (async () => {
   // 브라우저를 시작합니다.
@@ -40,6 +42,18 @@ const puppeteer = require("puppeteer");
 
   console.log(`회차 번호: ${result.drawNumber}`);
   console.log("로또 번호:", result.numbers);
+
+  // 캡처할 폴더가 없으면 생성합니다.
+  // const captureDir = path.join(__dirname, 'capture');
+  // if (!fs.existsSync(captureDir)) {
+  //   fs.mkdirSync(captureDir);
+  // }
+
+  // 화면을 캡처하여 PNG 파일로 저장합니다.
+  // const fileName = path.join(captureDir, `lottery_${result.drawNumber}.png`);
+  // await page.screenshot({ path: fileName, fullPage: true });
+
+  // console.log(`스크린샷 저장됨: ${fileName}`);
 
   // 브라우저를 닫습니다.
   await browser.close();
