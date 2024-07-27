@@ -1,0 +1,14 @@
+{
+  "name": "create-qrcode",
+  "version": "1.0.0",
+  "description": "A script to create qr code from the website using qrcode",
+  "main": "qrcode.js",
+  "scripts": {
+    "start": "node ./src/qrcode.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  }
+}
