@@ -3,14 +3,16 @@ const fs = require("fs");
 const path = require("path");
 
 const urls = [
-  "https://brunch.co.kr/@tamer/26",
-  "https://brunch.co.kr/@brand-unboxing/16",
-  "https://brunch.co.kr/@yoonash/172",
-  "https://brunch.co.kr/@yoonash/117",
-  "https://brunch.co.kr/@lovebrander",
-  "https://brunch.co.kr/@geunbae/5",
-  "https://brunch.co.kr/@clickb7402/100",
-  "https://brunch.co.kr/@yj5wqu/10",
+  "https://brunch.co.kr/@kfinland100/57", // 성공을 위한 10가지 습관
+  "https://brunch.co.kr/@kfinland100/71", // 부자가 되기 위한 7가지 방법
+  "https://brunch.co.kr/@kfinland100/73", // 성공한 사람들의 공통점
+  "https://brunch.co.kr/@kfinland100/42", // 부자가 되기 위한 재정 관리 팁
+  "https://brunch.co.kr/@kfinland100/33", // 성공적인 커리어를 위한 전략
+  "https://brunch.co.kr/@kfinland100/113", // 부자가 되기 위한 투자 전략
+  "https://brunch.co.kr/@kfinland100/26", // 성공을 위한 시간 관리 비법
+  "https://brunch.co.kr/@kfinland100/10", // 부자가 되기 위한 습관
+  "https://brunch.co.kr/@kfinland100/16", // 성공한 사람들의 일상 루틴
+  "https://brunch.co.kr/@kfinland100/5", // 부자가 되기 위한 재정 목표 설정
 ];
 
 (async () => {
@@ -49,7 +51,7 @@ const urls = [
     const content = await page.evaluate(() => {
       const contentElement = document.querySelector(".wrap_body");
       return contentElement
-        ? contentElement.innerText.trim()
+        ? contentElement.innerText.trim().replace(/\n/g, "<br>")
         : "본문 내용을 찾을 수 없습니다.";
     });
 
