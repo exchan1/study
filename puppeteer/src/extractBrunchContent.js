@@ -12,8 +12,21 @@ const urls = [
   "https://brunch.co.kr/@kfinland100/26", // 성공을 위한 시간 관리 비법
   "https://brunch.co.kr/@kfinland100/10", // 부자가 되기 위한 습관
   "https://brunch.co.kr/@kfinland100/16", // 성공한 사람들의 일상 루틴
-  "https://brunch.co.kr/@kfinland100/5", // 부자가 되기 위한 재정 목표 설정
 ];
+
+function removeUnsupportedTags(html, allowedTagsString) {
+  const allowedTags = allowedTagsString.split(",").map((tag) => tag.trim());
+  const allowedTagsPattern = allowedTags.join("|");
+  const tagRegex = new RegExp(`<(?!/?(${allowedTagsPattern})\\b)[^>]+>`, "gi");
+  const linkRegex = /<a\b[^>]*>(.*?)<\/a>/gi;
+  const brRegex = /<br\s*\/?>/gi;
+
+  // 태그와 링크 제거, <br> 태그를 줄바꿈으로 변환
+  return html
+    .replace(tagRegex, "")
+    .replace(linkRegex, "$1")
+    .replace(brRegex, "\n");
+}
 
 (async () => {
   // 브라우저를 시작합니다.
@@ -56,7 +69,10 @@ const urls = [
     });
 
     // book.txt 파일에 내용 추가
-    const chapterContent = `<CHAPTER> : ${title}\n\n${content}\n\n`;
+    const chapterContent = `<CHAPTER> : ${title}\n\n${removeUnsupportedTags(
+      content,
+      "div,p,strong,br"
+    )}\n\n`;
     fs.appendFileSync(bookFilePath, chapterContent);
 
     console.log(`본문 내용이 ${bookFilePath}에 추가되었습니다 (${url}).`);

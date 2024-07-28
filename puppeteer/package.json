@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "epub-gen": "^0.1.0",
+    "jsdom": "^24.1.1",
     "puppeteer": "^22.14.0"
   }
 }
