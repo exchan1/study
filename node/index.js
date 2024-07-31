@@ -5,6 +5,11 @@ const fs = require("fs");
 // 파일명을 변수로 선언
 const fileName = "./lotto.json";
 
+// 로또회차
+const lootoNo = 1130;
+// 반복횟수
+const loopCnt = 10;
+
 const newData = [];
 
 const addDrwNo = () => {
@@ -77,7 +82,7 @@ const setDewNos = (e) => {
 };
 
 const reqNo = async (no) => {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < loopCnt; i++) {
     const options = {
       uri: "https://www.dhlottery.co.kr/common.do",
       qs: {
@@ -89,19 +94,46 @@ const reqNo = async (no) => {
       let obj = JSON.parse(body);
       const drw = setDewNos(obj);
       newData.push(drw);
-      // addDrwNo(drw);
+
+      if (newData.length === loopCnt) {
+        // console.log(newData);
+        // addDrwNo();
+      }
     });
   }
-
-  setTimeout(function () {
-    // addDrwNo();
-  }, 3000);
 };
 
 const getLottoNo = async () => {
-  const no = 1119;
-  await reqNo(no);
+  await reqNo(lootoNo);
   // await addDrw();
 };
 
 getLottoNo();
+
+/*
+// 모의로 최근 10회의 로또 번호
+const recentLottoNumbers = [
+    [3, 7, 12, 22, 34, 38],
+    [4, 10, 18, 27, 30, 33],
+    [7, 11, 12, 31, 33, 38],
+    [6, 13, 17, 18, 29, 30],
+    [8, 10, 23, 31, 35, 40],
+    [5, 14, 20, 23, 30, 32],
+    [9, 15, 21, 28, 36, 39],
+    [2, 6, 15, 22, 29, 36],
+    [1, 4, 8, 11, 28, 40],
+    [3, 7, 15, 17, 19, 42]
+];
+
+// 최근 10회의 로또 번호 중 5개 선택
+const selectedNumbers = recentLottoNumbers[9].slice(0, 5);
+
+// 나머지 번호 생성
+const remainingNumber = Math.floor(Math.random() * 45) + 1;
+const allNumbers = [...selectedNumbers, remainingNumber];
+
+// 결과 문자열로 변환 및 정렬
+const formattedNumbers = allNumbers.map(number => (number < 10 ? '0' : '') + number).sort((a, b) => a - b).join(', ');
+
+console.log(formattedNumbers);
+*/
