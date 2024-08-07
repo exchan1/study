@@ -59,21 +59,80 @@ const addDrwNo = () => {
   });
 };
 
+let arr1 = [];
+const logs = (str) => {
+  console.log(
+    `%c ==================== ${str}`,
+    "color:yellow; font-weight:bold;"
+  );
+};
+
+const setNum = () => {
+  // 1~45번
+  let allNo = new Array(45)
+    .fill(0)
+    .map((_, i) => (i < 9 ? "0" + (i + 1) : String(i + 1)));
+  // 출현수
+  logs("출현수");
+  console.log(arr1);
+  // 미출수
+  let arr2 = [];
+  // 결과
+  arr2 = allNo.filter((v) => arr1.indexOf(v) === -1);
+  logs("미출수");
+  console.log(arr2);
+  const uniqueArr = arr1.filter((element, index) => {
+    return arr1.indexOf(element) === index;
+  });
+  // console.log(uniqueArr);
+  logs("결과");
+
+  let lottoArr = [];
+  for (j = 0; j < 5; j++) {
+    let newnum = [];
+    for (i = 0; i <= 4; i++) {
+      var movenum = uniqueArr.splice(
+        Math.floor(Math.random() * uniqueArr.length),
+        1
+      )[0];
+      newnum.push(movenum);
+    }
+    newnum.push(arr2.splice(Math.floor(Math.random() * arr2.length), 1)[0]);
+    lottoArr.push(newnum.sort());
+  }
+  let txt = "";
+  lottoArr.forEach((element) => {
+    console.log(element.join());
+    txt += element.join() + "<br />";
+  });
+};
+
 /**
  * 시용법
  * npm run start
  */
 const setDewNos = (e) => {
   let nos = [];
-  nos.push(String(e.drwtNo1 < 10 ? "0" + e.drwtNo1 : e.drwtNo1));
-  nos.push(String(e.drwtNo2 < 10 ? "0" + e.drwtNo2 : e.drwtNo2));
-  nos.push(String(e.drwtNo3 < 10 ? "0" + e.drwtNo3 : e.drwtNo3));
-  nos.push(String(e.drwtNo4 < 10 ? "0" + e.drwtNo4 : e.drwtNo4));
-  nos.push(String(e.drwtNo5 < 10 ? "0" + e.drwtNo5 : e.drwtNo5));
-  nos.push(String(e.drwtNo6 < 10 ? "0" + e.drwtNo6 : e.drwtNo6));
+  let no1 = String(e.drwtNo1 < 10 ? "0" + e.drwtNo1 : e.drwtNo1);
+  let no2 = String(e.drwtNo2 < 10 ? "0" + e.drwtNo2 : e.drwtNo2);
+  let no3 = String(e.drwtNo3 < 10 ? "0" + e.drwtNo3 : e.drwtNo3);
+  let no4 = String(e.drwtNo4 < 10 ? "0" + e.drwtNo4 : e.drwtNo4);
+  let no5 = String(e.drwtNo5 < 10 ? "0" + e.drwtNo5 : e.drwtNo5);
+  let no6 = String(e.drwtNo6 < 10 ? "0" + e.drwtNo6 : e.drwtNo6);
 
-  // console.log(`회차 : #${e.drwNo}`);
-  console.log(nos.join("  "));
+  nos.push(no1);
+  nos.push(no2);
+  nos.push(no3);
+  nos.push(no4);
+  nos.push(no5);
+  nos.push(no6);
+
+  arr1.push(no1);
+  arr1.push(no2);
+  arr1.push(no3);
+  arr1.push(no4);
+  arr1.push(no5);
+  arr1.push(no6);
 
   return {
     drwNo: e.drwNo,
@@ -96,6 +155,7 @@ const reqNo = async (no) => {
       newData.push(drw);
 
       if (newData.length === loopCnt) {
+        setNum();
         // console.log(newData);
         // addDrwNo();
       }
