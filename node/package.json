@@ -7,12 +7,15 @@
     "start": "node index.js",
     "get-lotto": "node get-lotto.js",
     "m-lotto": "node mlotto.js",
+    "lotto2": "node lotto-2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "expres": "^0.0.5",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.3.2",
     "random": "^4.1.0",
     "request": "^2.88.2"
   }
