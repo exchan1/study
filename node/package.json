@@ -8,6 +8,7 @@
     "get-lotto": "node get-lotto.js",
     "m-lotto": "node mlotto.js",
     "lotto2": "node lotto-2.js",
+    "lotto3": "node lotto-3.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

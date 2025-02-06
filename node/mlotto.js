@@ -3,39 +3,29 @@ const M = 6; // 예측할 로또 번호 개수
 const K = 10000; // 시뮬레이션 횟수
 
 function gen() {
-  let lotto = new Array(M);
-  for (let i = 0; i < M; i++) {
-    let r = Math.floor(Math.random() * N) + 1;
-    lotto[i] = r;
+  const lotto = new Set();
+  while (lotto.size < M) {
+    lotto.add(Math.floor(Math.random() * N) + 1);
   }
-  return lotto;
+  return Array.from(lotto);
 }
 
 function predict() {
-  let counts = new Array(N + 1).fill(0);
+  const counts = new Array(N + 1).fill(0);
 
   for (let i = 0; i < K; i++) {
-    let prediction = gen();
-    prediction.forEach((n) => counts[n]++);
+    gen().forEach((n) => counts[n]++);
   }
 
-  let top = [];
-  for (let i = 0; i < M; i++) {
-    let maxIdx = counts.indexOf(Math.max(...counts));
-    counts[maxIdx] = 0;
-    top.push(maxIdx < 10 ? `0${maxIdx}` : `${maxIdx}`);
-  }
-
-  return top.sort((a, b) => a - b);
+  return counts
+    .map((count, number) => ({ number, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, M)
+    .map(({ number }) => (number < 10 ? `0${number}` : `${number}`))
+    .sort((a, b) => a - b);
 }
 
 // 다섯 번의 결과 출력
 for (let i = 0; i < 5; i++) {
-  let high = predict();
-  console.log(high.join(","));
+  console.log(predict().join(","));
 }
-
-/*
-npm run start
-npm run m-lotto
-*/

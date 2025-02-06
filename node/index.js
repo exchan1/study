@@ -1,8 +1,9 @@
 const request = require("request");
 const fs = require("fs").promises;
 const fileName = "./lotto.json";
-const lootoNo = 1132;
+const lootoNo = 1142;
 const loopCnt = 10;
+// const loopCnt = 15;
 const newData = [];
 
 const addDrwNo = async () => {
@@ -76,10 +77,20 @@ const setDewNos = (e) => {
     e.drwtNo6,
   ].map((num) => String(num < 10 ? "0" + num : num));
   arr1.push(...nos);
+  console.log(nos);
   return {
     drwNo: e.drwNo,
     drwData: nos,
   };
+};
+
+const getTestData = async () => {
+  const fetch = (await import("node-fetch")).default;
+  const response = await fetch(
+    "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1140"
+  );
+  const obj = await response.json();
+  console.log(obj);
 };
 
 (async () => {
