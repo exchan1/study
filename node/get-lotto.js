@@ -44,8 +44,6 @@ const setDewNos = (e) => {
     e.drwtNo5,
     e.drwtNo6,
   ].map((num) => String(num < 10 ? "0" + num : num));
-  // arr1.push(...nos);
-  // console.log(nos);
   return {
     drwNo: e.drwNo,
     drwData: nos,
