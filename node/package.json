@@ -9,11 +9,14 @@
     "m-lotto": "node mlotto.js",
     "lotto2": "node lotto-2.js",
     "lotto3": "node lotto-3.js",
+    "g-lotto": "node lotto_round.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0",
     "expres": "^0.0.5",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
