@@ -3,7 +3,6 @@ const fs = require("fs").promises;
 const fileName = "./lotto.json";
 const lootoNo = 1142;
 const loopCnt = 10;
-// const loopCnt = 15;
 const newData = [];
 
 const addDrwNo = async () => {
@@ -112,7 +111,7 @@ const getTestData = async () => {
         const drw = setDewNos(obj);
         newData.push(drw);
       }
-      setNum(newData);
+      setNum();
       logs("New!!!");
       console.log(setNum2(newData));
     } catch (err) {
